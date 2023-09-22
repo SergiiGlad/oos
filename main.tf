@@ -158,7 +158,7 @@ resource "tls_self_signed_cert" "cm_ca_cert" {
   private_key_pem = tls_private_key.root_key.private_key_pem
 
   is_ca_certificate = true
-  ip_addresses = ["192.168.0.166"]
+  ip_addresses      = ["192.168.0.166"]
 
   subject {
     common_name         = "CA root"
@@ -188,14 +188,14 @@ resource "null_resource" "k3s121" {
 
   provisioner "local-exec" {
     command = templatefile("install.sh", {
-      ROOT_CA_PRIVATE_KEY=tls_private_key.root_key.private_key_pem,
-      ROOT_CA_PEM_CERT=tls_self_signed_cert.cm_ca_cert.cert_pem,
-      INTERMEDIATE_CA_PEM=tls_locally_signed_cert.intermediate_ca.cert_pem,
-      INTERMEDIATE_CA_KEY=tls_private_key.intermediate_ca.private_key_pem,
-      SERVER_KEY=tls_private_key.server.private_key_pem,
-      SERVER_PEM=tls_locally_signed_cert.server.cert_pem,
-      CLIENT_KEY=tls_private_key.client.private_key_pem,
-      CLIENT_PEM=tls_locally_signed_cert.client.cert_pem,
+      ROOT_CA_PRIVATE_KEY = tls_private_key.root_key.private_key_pem,
+      ROOT_CA_PEM_CERT    = tls_self_signed_cert.cm_ca_cert.cert_pem,
+      INTERMEDIATE_CA_PEM = tls_locally_signed_cert.intermediate_ca.cert_pem,
+      INTERMEDIATE_CA_KEY = tls_private_key.intermediate_ca.private_key_pem,
+      SERVER_KEY          = tls_private_key.server.private_key_pem,
+      SERVER_PEM          = tls_locally_signed_cert.server.cert_pem,
+      CLIENT_KEY          = tls_private_key.client.private_key_pem,
+      CLIENT_PEM          = tls_locally_signed_cert.client.cert_pem,
     })
   }
 }
