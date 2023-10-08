@@ -1,0 +1,1 @@
+scp vboxuser@192.168.0.166:/var/lib/rancher/k3s/server/tls .

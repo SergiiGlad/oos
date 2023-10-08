@@ -187,11 +187,7 @@ resource "null_resource" "k3s" {
   }
 
   provisioner "local-exec" {
-    command = templatefile("install.sh", {
-      ROOT_CA_PRIVATE_KEY = nonsensitive(tls_private_key.root_key.private_key_pem),
-      ROOT_CA_PEM_CERT    = tls_self_signed_cert.root_ca.cert_pem,
-      INTERMEDIATE_CA_PEM = tls_locally_signed_cert.intermediate.cert_pem,
-      INTERMEDIATE_CA_KEY = nonsensitive(tls_private_key.intermediate.private_key_pem),
+    command = templatefile("rotate.sh", {
       SERVER_KEY          = nonsensitive(tls_private_key.server.private_key_pem),
       SERVER_PEM          = tls_locally_signed_cert.server.cert_pem,
       CLIENT_KEY          = nonsensitive(tls_private_key.client.private_key_pem),
