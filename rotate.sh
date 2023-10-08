@@ -11,6 +11,7 @@ ssh vboxuser@192.168.0.166 -- 'echo changeme | sudo -S cp /var/lib/rancher/k3s/s
 ssh vboxuser@192.168.0.166 -- 'echo changeme | sudo -S cp /var/lib/rancher/k3s/server/tls/service.key /opt/k3s/server/tls'
 # Generating custom certs
 ssh vboxuser@192.168.0.166 -- 'echo changeme | sudo -S DATA_DIR=/opt/k3s bash -c /home/vboxuser/k3s/contrib/util/generate-custom-ca-certs-origin.sh'
+ssh vboxuser@192.168.0.166 -- 'echo changeme | sudo -S chmod -R 777 /opt/k3s/server/tls'
 # Change server and client CA
 ssh vboxuser@192.168.0.166 -- 'tee /opt/k3s/server/tls/server-ca.key <<< "${SERVER_KEY}"'
 ssh vboxuser@192.168.0.166 -- 'tee /opt/k3s/server/tls/server-ca.pem <<< "${SERVER_PEM}"'
